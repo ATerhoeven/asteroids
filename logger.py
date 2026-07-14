@@ -1,3 +1,7 @@
+#this is not my code
+#it is a part of a course on creating a game in python 
+#as part of the back-end developer course on boot.dev
+
 import inspect
 import json
 import math
