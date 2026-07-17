@@ -1,3 +1,6 @@
+# the base code in this class was firt copied from boot.dev while doing classes on
+# backend developing, it was later modified under instructions to learn creating your own project
+
 import pygame
 
 
