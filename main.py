@@ -1,5 +1,6 @@
 import pygame
-from logger import log_state
+import sys
+from logger import log_state, log_event
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 from asteroid import Asteroid
@@ -48,24 +49,33 @@ def main():
 
     while True:
         log_state()
-        #processing the pygame event queue
+        # processing the pygame event queue
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         
         screen.fill((0, 0, 0))
 
-        #update all the objects in the group updateable
+        # update all the objects in the group updateable
         for object in updatable:
             object.update(dt)
 
-        #draw all the objects in drawable
+        # iterate over all the objects in the asteroids group
+        # check for collision with the player
+        # log the event player_hit print Game over! on the console and exit the game 
+        for object in asteroids:
+            if object.collides_with(player):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
+
+        # draw all the objects in drawable
         for object in drawable:
             object.draw(screen)
 
         pygame.display.flip()
 
-        #calling the .tick() method on the clock object dividing it by 1000 and saving the value in dt
+        # calling the .tick() method on the clock object dividing it by 1000 and saving the value in dt
         dt = clock.tick(60) / 1000
         
     
