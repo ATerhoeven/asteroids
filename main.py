@@ -70,11 +70,17 @@ def main():
         # iterate over all the objects in the asteroids group
         # check for collision with the player
         # log the event player_hit print Game over! on the console and exit the game 
-        for object in asteroids:
-            if object.collides_with(player):
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    asteroid.kill()
 
         # draw all the objects in drawable
         for object in drawable:
