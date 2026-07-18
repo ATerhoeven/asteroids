@@ -5,6 +5,7 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -29,6 +30,9 @@ def main():
     # create a new empty sprite group for the asteroids
     asteroids = pygame.sprite.Group()
 
+    # create an empty group for the shot class
+    shots = pygame.sprite.Group()
+
     # adding the Player class to the updateable and drawable groups. 
     # this needs to be done before these objects are created
     Player.containers = (updatable, drawable)
@@ -40,6 +44,9 @@ def main():
     # AsteroidField only contains the logic for spawning new asteroids, hence it is neither drawable nor
     # an asteroid but we need the logic in the update loop.
     AsteroidField.containers = (updatable)
+
+    # A shot is an object that needs updateing, is drawable and is part of shots, also it is no asteroid
+    Shot.containers = (shots, updatable, drawable)
 
     # create a new AsteroidField object
     asteroidfield = AsteroidField()
